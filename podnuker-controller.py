@@ -33,7 +33,7 @@ while True:
                     logging.info(f"Deleting Evicted Pod %s", pod.metadata.name)
                     # Delete pod from namespace
                     api_response = api_instance.delete_namespaced_pod(pod.metadata.name, namespace)
-                    print(api_response.status.message)
+                    logging.info(f"Deletion exit code: %s", api_response.status.message)
                 except ApiException as e:
                     logging.info(f"Exception when calling CoreV1Api->delete_namespaced_pod: %s\n", e)
         logging.info(f"All pods are running fine in namespace %s", namespace)
