@@ -27,7 +27,7 @@ while True:
 
         for pod in pods.items:
             # If pod status is Evicted
-            if pod.status.reason == "Evicted":
+            if pod.status.reason == "Evicted" or pod.status.phase == "Failed": 
                 logging.info(f"Pod: %s - Status: %s", pod.metadata.name, pod.status.reason)
                 try:
                     logging.info(f"Deleting Evicted Pod %s", pod.metadata.name)

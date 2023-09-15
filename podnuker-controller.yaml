@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: podnuker-controller
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: podnuker-controller
+  template:
+    metadata:
+      labels:
+        app: podnuker-controller
+    spec:
+      nodeSelector:
+        doks.digitalocean.com/node-pool: worker-pool
+      serviceAccountName: podnuker-controller
+      containers:
+      - image: registry.digitalocean.com/foobar/podnuker-controller:latest
+        imagePullPolicy: Always
+        name: podnuker-controller
+      imagePullSecrets:
+      - name: registry-foobar
